@@ -13,6 +13,12 @@ gem 'jbuilder'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rubocop'
+  gem 'rubocop-rails'
+  gem 'rubocop-rspec'
+  gem 'rubocop-performance'
+  gem 'rubocop-capybara'
+  gem 'rubocop-factory_bot'
 end
 
 group :development do
