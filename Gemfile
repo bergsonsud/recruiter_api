@@ -9,7 +9,9 @@ gem 'puma', '~> 3.11'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'devise'
 gem 'jbuilder'
-
+gem 'devise_token_auth'
+gem 'rack-cors', require: 'rack/cors'
+gem 'dotenv-rails'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -28,11 +30,14 @@ group :development do
 end
 
 group :test do
+    gem 'rspec'
     gem 'rspec-rails'
+    gem 'rspec-retry'
     gem 'factory_bot_rails', '6.0.0'
     gem 'faker'
     gem 'shoulda-matchers'
     gem 'database_cleaner'
+    gem 'rails-controller-testing'
 end
 
 
