@@ -1,6 +1,8 @@
 name: CI Rspec
 on:
-  - pull_request
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
 jobs:
   rspec:
     name: RSpec
