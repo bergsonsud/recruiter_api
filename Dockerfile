@@ -9,6 +9,7 @@ COPY Gemfile.lock /recruiter_api/Gemfile.lock
 
 RUN gem update --system 3.3.22
 RUN gem install bundler -v 2.3.22
+RUN gem install ffi -v '1.17.0'
 RUN bundle install
 
 COPY . /recruiter_api
