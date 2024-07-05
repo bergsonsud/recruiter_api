@@ -42,4 +42,4 @@ jobs:
           bundle exec rails db:migrate
 
       - name: Run tests
-        run: bundle exec rspec spec --format documentation
+        run: bundle exec rspec spec/models spec/requests

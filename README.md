@@ -33,6 +33,12 @@ A RecruiterAPI facilita o cadastro de vagas de emprego, recrutados e a submissã
 ./start.sh
 ```
 
+### Executando testes
+
+```
+./rspec.sh
+```
+
 
 ### Links
 
