@@ -22,14 +22,14 @@ RSpec.describe("Recruiters::Registrations", type: :request) do
 
     context "with valid params" do
       it "creates a new recruiter" do
-        post "/recruiters", params: valid_params, headers: json_headers
+        post "/v1/recruiters", params: valid_params, headers: json_headers
         expect(response).to(have_http_status(:ok))
       end
     end
 
     context "with invalid params" do
       it "does not create a new recruiter" do
-        post "/recruiters", params: invalid_params, headers: json_headers
+        post "/v1//recruiters", params: invalid_params, headers: json_headers
         expect(response).to(have_http_status(:unprocessable_entity))
       end
     end
@@ -40,7 +40,7 @@ RSpec.describe("Recruiters::Registrations", type: :request) do
 
     context "with valid params" do
       it "signs in the recruiter" do
-        post "/recruiters/sign_in",
+        post "/v1//recruiters/sign_in",
           params: { email: recruiter.email, password: recruiter.password },
           headers: json_headers
         expect(response).to(have_http_status(:ok))
@@ -49,7 +49,7 @@ RSpec.describe("Recruiters::Registrations", type: :request) do
 
     context "with invalid params" do
       it "does not sign in the recruiter" do
-        post "/recruiters/sign_in", params: { email: recruiter.email, password: "invalid" }, headers: json_headers
+        post "/v1//recruiters/sign_in", params: { email: recruiter.email, password: "invalid" }, headers: json_headers
         expect(response).to(have_http_status(:unauthorized))
       end
     end
@@ -60,10 +60,7 @@ RSpec.describe("Recruiters::Registrations", type: :request) do
 
     context "with valid params" do
       it "signs out the recruiter" do
-        headers = json_headers
-        post "/recruiters/sign_in", params: { email: recruiter.email, password: recruiter.password }, headers: headers
-        headers["Authorization"] = response.headers["Authorization"]
-        delete "/recruiters/sign_out", headers: headers
+        delete "/v1/recruiters/sign_out", headers: auth_headers(recruiter)
         expect(response).to(have_http_status(:ok))
       end
     end
