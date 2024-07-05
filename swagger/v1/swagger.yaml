@@ -1,0 +1,307 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/v1/jobs":
+    get:
+      summary: list jobs with search parameter
+      tags:
+      - Public
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    title:
+                      type: string
+                    description:
+                      type: string
+                    start_date:
+                      type: string
+                      format: date
+                    end_date:
+                      type: string
+                      format: date
+                    status:
+                      type: string
+                    skills:
+                      type: string
+                    recruiter_id:
+                      type: integer
+                  required:
+                  - id
+                  - title
+                  - description
+                  - recruiter_id
+      parameters:
+      - name: search
+        in: query
+        description: Search query for title, description, or skills
+        schema:
+          type: string
+  "/v1/jobs/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: Job ID
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: show job
+      tags:
+      - Public
+      responses:
+        '200':
+          description: successful
+  "/v1/recruiters/jobs":
+    get:
+      summary: list jobs
+      tags:
+      - Recruiters > Jobs
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    title:
+                      type: string
+                    description:
+                      type: string
+                    start_date:
+                      type: string
+                      format: date
+                    end_date:
+                      type: string
+                      format: date
+                    status:
+                      type: string
+                    skills:
+                      type: string
+                    recruiter_id:
+                      type: integer
+                  required:
+                  - id
+                  - title
+                  - description
+                  - recruiter_id
+    post:
+      summary: create job
+      tags:
+      - Recruiters > Jobs
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '201':
+          description: created
+        '422':
+          description: unprocessable entity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                start_date:
+                  type: string
+                  format: date
+                end_date:
+                  type: string
+                  format: date
+                status:
+                  type: string
+                skills:
+                  type: string
+                recruiter_id:
+                  type: integer
+              required:
+              - title
+              - description
+              - recruiter_id
+  "/v1/recruiters/jobs/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: show job
+      tags:
+      - Recruiters > Jobs
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update job
+      tags:
+      - Recruiters > Jobs
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+        '422':
+          description: unprocessable entity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                start_date:
+                  type: string
+                  format: date
+                end_date:
+                  type: string
+                  format: date
+                status:
+                  type: string
+                skills:
+                  type: string
+                recruiter_id:
+                  type: integer
+              required:
+              - title
+              - description
+              - recruiter_id
+    delete:
+      summary: delete job
+      tags:
+      - Recruiters > Jobs
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '204':
+          description: successful
+  "/v1/recruiters/sign_up":
+    post:
+      summary: create a new account
+      tags:
+      - Recruiters > Registration
+      parameters: []
+      responses:
+        '201':
+          description: created
+        '422':
+          description: unprocessable entity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+                password_confirmation:
+                  type: string
+              required:
+              - email
+              - password
+              - password_confirmation
+  "/v1/recruiters/sign_in":
+    post:
+      summary: sign in to the account
+      tags:
+      - Recruiters > Registration
+      parameters: []
+      responses:
+        '200':
+          description: successful
+        '401':
+          description: unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - email
+              - password
+  "/v1/submissions":
+    post:
+      summary: Creates a submission
+      tags:
+      - Public
+      parameters: []
+      responses:
+        '201':
+          description: created
+        '422':
+          description: unprocessable entity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                mobile_phone:
+                  type: string
+                resume:
+                  type: string
+                job_id:
+                  type: integer
+              required:
+              - name
+              - email
+              - job_id
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000
