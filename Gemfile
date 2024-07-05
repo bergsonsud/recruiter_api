@@ -12,6 +12,8 @@ gem 'jbuilder'
 gem 'devise_token_auth'
 gem 'rack-cors', require: 'rack/cors'
 gem 'dotenv-rails'
+gem 'has_scope'
+gem 'will_paginate'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -38,6 +40,7 @@ group :test do
     gem 'shoulda-matchers'
     gem 'database_cleaner'
     gem 'rails-controller-testing'
+    gem 'simplecov', require: false
 end
 
 
