@@ -37,6 +37,7 @@ A RecruiterAPI facilita o cadastro de vagas de emprego, recrutados e a submissã
 ### Links
 
 * Aplicação http://localhost:3000
+* Documentação da API http://localhost:3000/api-docs
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
