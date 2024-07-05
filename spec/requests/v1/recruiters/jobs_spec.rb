@@ -21,7 +21,7 @@ RSpec.describe("Recruiters::Jobs", type: :request) do
       end
     end
 
-    context "with invalid owner" do
+    context "with another owner" do
       it "does not get the jobs" do
         get "/v1/recruiters/jobs", headers: auth_headers(recruiter2)
         expect(response).to(have_http_status(:ok))

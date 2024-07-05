@@ -12,4 +12,6 @@ SimpleCov.start 'rails' do
   add_filter 'app/mailers'
   add_filter 'app/jobs'
   add_filter 'app/models/application_record.rb'
+  # SimpleCov does not recognize model, change to Coverband after
+  add_filter 'app/models/recruiter.rb'
 end
