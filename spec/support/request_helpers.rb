@@ -10,7 +10,7 @@ module RequestHelpers
 
   def auth_headers(recruiter)
     headers = json_headers
-    post "/v1//recruiters/sign_in", params: { email: recruiter.email, password: recruiter.password }, headers: headers
+    post "/v1/recruiters/sign_in", params: { email: recruiter.email, password: recruiter.password }, headers: headers
     headers["Authorization"] = response.headers["Authorization"]
     headers
   end
