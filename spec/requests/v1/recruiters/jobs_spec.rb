@@ -5,6 +5,8 @@ require "rails_helper"
 RSpec.describe("Recruiters::Jobs", type: :request) do
   let(:recruiter) { create(:recruiter) }
   let(:recruiter2) { create(:recruiter) }
+  let(:job) { create(:job, recruiter: recruiter) }
+  let(:job2) { create(:job, recruiter: recruiter2) }
 
   describe "GET /recruiters/jobs" do
     context "with valid params" do
@@ -25,6 +27,30 @@ RSpec.describe("Recruiters::Jobs", type: :request) do
       it "does not get the jobs" do
         get "/v1/recruiters/jobs", headers: auth_headers(recruiter2)
         expect(response).to(have_http_status(:ok))
+      end
+    end
+  end
+
+  describe "GET /recruiters/jobs/:id" do
+    context "with valid params" do
+      it "gets a job" do
+        get "/v1/recruiters/jobs/#{job.id}", headers: auth_headers(recruiter)
+        expect(response).to(have_http_status(:ok))
+        expect(JSON.parse(response.body)["id"]).to(eq(job.id))
+      end
+    end
+
+    context "with invalid params" do
+      it "does not get a job" do
+        get "/v1/recruiters/jobs/#{job.id}", headers: json_headers
+        expect(response).to(have_http_status(:unauthorized))
+      end
+    end
+
+    context "with invalid owner" do
+      it "does not get a job" do
+        get "/v1/recruiters/jobs/#{job2.id}", headers: auth_headers(recruiter)
+        expect(response).to(have_http_status(:not_found))
       end
     end
   end
